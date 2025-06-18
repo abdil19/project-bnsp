@@ -19,6 +19,17 @@
                     <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.index')">
                         {{ __('Products') }}
                     </x-nav-link>
+
+                    {{-- Link Cart --}}
+                    <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')">
+                        {{ __('Cart') }}
+                        {{-- Tampilkan jumlah item jika ada --}}
+                        @if (session('cart'))
+                            <span class="ml-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+                                {{ count(session('cart')) }}
+                            </span>
+                        @endif
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -78,6 +89,16 @@
             <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.index')">
                 {{ __('Products') }}
             </x-nav-link>
+
+            {{-- Link Cart --}}
+            <x-responsive-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')">
+                {{ __('Cart') }}
+                @if (session('cart'))
+                    <span class="ml-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+                        {{ count(session('cart')) }}
+                    </span>
+                @endif
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,13 @@ Route::middleware('auth')->group(function () {
 
     // Rute untuk Products
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-    // Nanti route untuk keranjang & checkout bisa kita taruh di sini juga
+
+    // Rute untuk Cart
+    Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::patch('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+
 });
 
 
