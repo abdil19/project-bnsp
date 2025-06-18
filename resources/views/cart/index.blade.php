@@ -61,7 +61,12 @@
 
                         <div class="text-right mt-6">
                             <h3 class="text-xl font-bold">Grand Total: Rp {{ number_format($grandTotal, 0, ',', '.') }}</h3>
-                            <a href="#" class="inline-block mt-4 bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700">Lanjut ke Checkout</a>
+                            <form action="{{ route('checkout.process') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="inline-block mt-4 bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700">
+                                    Lanjut ke Checkout
+                                </button>
+                            </form>
                         </div>
                     @endif
                 </div>
