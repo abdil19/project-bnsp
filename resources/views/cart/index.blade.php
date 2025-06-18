@@ -35,14 +35,8 @@
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 align-middle">
                                             <td class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{ $details['name'] }}</td>
                                             <td class="px-6 py-4">Rp {{ number_format($details['price'], 0, ',', '.') }}</td>
-                                            <td class="px-6 py-4">
-                                                {{-- Form untuk update quantity --}}
-                                                <form action="{{ route('cart.update', $id) }}" method="POST">
-                                                    @csrf
-                                                    @method('PATCH')
-                                                    <input type="number" name="quantity" value="{{ $details['quantity'] }}" min="1" class="w-20 text-center border-gray-300 rounded-md dark:bg-gray-700 dark:text-white">
-                                                    <button type="submit" class="ml-2 text-sm text-blue-500 hover:underline">Update</button>
-                                                </form>
+                                            <td class="px-6 py-4 text-center">
+                                                {{ $details['quantity'] }}
                                             </td>
                                             <td class="px-6 py-4 text-right">Rp {{ number_format($subtotal, 0, ',', '.') }}</td>
                                             <td class="px-6 py-4 text-center">
@@ -64,7 +58,7 @@
                             <form action="{{ route('checkout.process') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="inline-block mt-4 bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700">
-                                    Lanjut ke Checkout
+                                    Checkout
                                 </button>
                             </form>
                         </div>

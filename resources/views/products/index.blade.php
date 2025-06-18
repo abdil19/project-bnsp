@@ -14,7 +14,7 @@
                     @if (session('success'))
                     <div
                         x-data="{ show: true }"
-                        x-init="setTimeout(() => show = false, 3000)"
+                        x-init="setTimeout(() => show = false, 2000)"
                         x-show="show"
                         x-transition:leave="transition ease-in duration-300"
                         x-transition:leave-start="opacity-100"
@@ -33,7 +33,13 @@
                                 <div>
 
                                     {{-- Placeholder untuk gambar produk --}}
-                                    <div class="bg-gray-200 dark:bg-gray-700 h-48 w-full mb-4 rounded"></div>
+                                    @if ($product->image)
+                                        <img src="{{ asset('images/products/' . $product->image) }}" alt="{{ $product->name }}" class="h-48 w-full object-cover mb-4 rounded">
+                                    @else
+                                        <div class="bg-gray-200 dark:bg-gray-700 h-48 w-full mb-4 rounded flex items-center justify-center">
+                                            <span class="text-gray-500 text-sm">Tanpa Gambar</span>
+                                        </div>
+                                    @endif
                                     <h3 class="font-bold text-lg mb-2">{{ $product->name }}</h3>
                                     <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
                                         {{ Str::limit($product->description, 50) }}
@@ -49,16 +55,10 @@
                                     {{-- Button Keranjang --}}
                                     <form action="{{ route('cart.add', $product) }}" method="POST">
                                         @csrf
-                                        <div class="flex items-center justify-between gap-4">
-                                            {{-- Input untuk jumlah --}}
-                                            <input type="number" name="quantity" value="1" min="1" max="{{ $product->stock }}"
-                                                class="w-1/4 px-2 py-1 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-
                                             {{-- Tombol Add to Cart --}}
-                                            <button type="submit" class="flex-grow text-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                            <button type="submit" class="w-full text-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
                                                 Add to Cart
                                             </button>
-                                        </div>
                                     </form>
                                 </div>
                             </div>
